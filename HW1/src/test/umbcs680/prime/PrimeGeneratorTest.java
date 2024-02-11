@@ -123,14 +123,14 @@ public class PrimeGeneratorTest{
     }
 
 
-    //Testcase 11 : Positive testcase checking Prime number on not
+    //Testcase 11 : Positive testcase checking Prime number or not
     @Test
     public  void isPrimeWith23(){
         PrimeGenerator gen = new PrimeGenerator(100, 500);
         assertTrue(gen.isPrime(23));
     }
 
-    //Testcase 12 : Negitive testcase checking Prime number on not
+    //Testcase 12 : Negitive testcase checking Prime number or not
     @Test
     public  void isPrimeWith72(){
         PrimeGenerator gen = new PrimeGenerator(100, 500);
@@ -138,21 +138,21 @@ public class PrimeGeneratorTest{
     }
 
 
-    //Testcase 13 : Negitive testcase checking Prime number on not
+    //Testcase 13 : Negitive testcase checking Prime number or not
     @Test
     public  void isPrimeWithMinus31(){
         PrimeGenerator gen = new PrimeGenerator(100, 500);
         assertFalse(gen.isPrime(-31));
     }
 
-    //Testcase 14 : Positive testcase checking Even number on not
+    //Testcase 14 : Positive testcase checking Even number or not
     @Test
     public void isEvenWith88(){
         PrimeGenerator gen = new PrimeGenerator(100, 500);
         assertTrue(gen.isEven(88));
     }
 
-    //Testcase 15 : Negitive testcase checking Even number on not
+    //Testcase 15 : Negitive testcase checking Even number or not
     @Test
     public void isEvenWith71(){
         PrimeGenerator gen = new PrimeGenerator(100, 500);
@@ -160,7 +160,7 @@ public class PrimeGeneratorTest{
     }
 
 
-    //Testcase 16 : Negitive testcase checking Even number on not
+    //Testcase 16 : Negitive testcase checking Even number or not
     @Test
     public void isEvenWithMinus42(){
         PrimeGenerator gen = new PrimeGenerator(100, 500);
