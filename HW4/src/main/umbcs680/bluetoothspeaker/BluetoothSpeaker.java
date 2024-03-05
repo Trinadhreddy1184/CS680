@@ -8,9 +8,9 @@ public class BluetoothSpeaker {
     private State state ;
 
     private boolean isplaying,isconnected = false;
-    
+
     private static  BluetoothSpeaker instance=null;
- 
+
    private BluetoothSpeaker(){
         this.state =  Stopped.getInstance();
    }
@@ -20,9 +20,9 @@ public class BluetoothSpeaker {
        instance= new BluetoothSpeaker();
        return instance;
    }
-    
+
     public  void  changeState( State newState){
-       
+
        this.state = newState;
     }
 
@@ -58,13 +58,8 @@ public class BluetoothSpeaker {
         this.isconnected=false;
     }
 
-    public String getCurrentState(){
-        if (this.state instanceof StandBy) {
-            return "Standby state";
-        }else if (this.state instanceof Playing) {
-           return "Playing state";
-       }
-       return "Stopped state";
+    public State getCurrentState(){
+       return this.state;
     }
 
 
@@ -74,5 +69,11 @@ public class BluetoothSpeaker {
 
     public boolean getConnectionStatus(){
         return this.isconnected;
+    }
+
+    public void resetState() {
+        this.state = Stopped.getInstance();
+        this.isplaying = false;
+        this.isconnected = false;
     }
 }

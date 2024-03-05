@@ -2,128 +2,132 @@ package umbcs680.bluetoothspeaker;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.MethodOrderer.*;
 
-@TestMethodOrder(OrderAnnotation.class)
 public class BluetoothSpeakerTest {
-    
     private BluetoothSpeaker gen;
     
-    public BluetoothSpeakerTest(){
-       
-    }
-
     @Test
-    @Order(1)
     public void onBeforeStartConnectionCheck() {
-        gen=BluetoothSpeaker.getInstance();
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
         assertFalse(gen.getConnectionStatus());
     }
-    
+
     @Test
-    @Order(2)
     public void onBeforeStartCheck() {
-        gen=BluetoothSpeaker.getInstance();
-
-        assertEquals("Stopped state", gen.getCurrentState());
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
+        assertEquals(Stopped.getInstance(), gen.getCurrentState());
     }
 
     @Test
-    @Order(3)
     public void onStartCheck() {
-        gen=BluetoothSpeaker.getInstance();
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
         gen.powerButtonPushed();
-        assertEquals("Standby state", gen.getCurrentState());
+        assertEquals(StandBy.getInstance(), gen.getCurrentState());
     }
 
     @Test
-    @Order(4)
     public void onStartConnectionCheck() {
-        gen=BluetoothSpeaker.getInstance();
-
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
+        gen.powerButtonPushed();
         assertTrue(gen.getConnectionStatus());
     }
-    
+
     @Test
-    @Order(5)
     public void playCheck() {
-        gen=BluetoothSpeaker.getInstance();
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
+        gen.powerButtonPushed();
         gen.playPauseButtonPushed();
-        
         assertTrue(gen.getPlayingStatus());
     }
 
     @Test
-    @Order(6)
     public void playingModeCheck() {
-        gen=BluetoothSpeaker.getInstance();
-        assertEquals("Playing state", gen.getCurrentState());
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
+        gen.powerButtonPushed();
+        gen.playPauseButtonPushed();
+        assertEquals(Playing.getInstance(), gen.getCurrentState());
     }
 
     @Test
-    @Order(7)
     public void pauseCheck() {
-        gen=BluetoothSpeaker.getInstance();
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
+        gen.powerButtonPushed();
         gen.playPauseButtonPushed();
-
+        gen.playPauseButtonPushed();
         assertFalse(gen.getPlayingStatus());
     }
 
     @Test
-    @Order(8)
     public void pauseModeCheck() {
-        gen=BluetoothSpeaker.getInstance();
-        assertEquals("Standby state", gen.getCurrentState());
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
+        gen.powerButtonPushed();
+        gen.playPauseButtonPushed();
+        gen.playPauseButtonPushed();
+        assertEquals(StandBy.getInstance(), gen.getCurrentState());
     }
 
-
     @Test
-    @Order(9)
     public void playNextCheck() {
-        gen=BluetoothSpeaker.getInstance();
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
+        gen.powerButtonPushed();
         gen.nextButtonPushed();
         assertTrue(gen.getPlayingStatus());
     }
 
     @Test
-    @Order(10)
     public void playNextModeCheck() {
-        gen=BluetoothSpeaker.getInstance();
-        gen.nextButtonPushed();
-        assertEquals("Playing state", gen.getCurrentState());
-    }
-
-
-    @Test
-    @Order(11)
-    public void playPrevModeCheck() {
-        gen=BluetoothSpeaker.getInstance();
-        gen.prevButtonPushed();
-        assertEquals("Playing state", gen.getCurrentState());
-    }
-
-
-    @Test
-    @Order(12)
-    public void powerOffCheck() {
-        gen=BluetoothSpeaker.getInstance();
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
         gen.powerButtonPushed();
-        assertEquals("Stopped state", gen.getCurrentState());
+        gen.nextButtonPushed();
+        assertEquals(Playing.getInstance(), gen.getCurrentState());
     }
 
     @Test
-    @Order(13)
+    public void playPrevModeCheck() {
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
+        gen.powerButtonPushed();
+        gen.prevButtonPushed();
+        assertEquals(Playing.getInstance(), gen.getCurrentState());
+    }
+
+    @Test
+    public void powerOffCheck() {
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
+        gen.powerButtonPushed();
+        gen.prevButtonPushed();
+        gen.powerButtonPushed();
+        assertEquals(Stopped.getInstance(), gen.getCurrentState());
+    }
+
+    @Test
     public void powerOffConnectionCheck() {
-        gen=BluetoothSpeaker.getInstance();
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
+        gen.powerButtonPushed();
+        gen.prevButtonPushed();
+        gen.powerButtonPushed();
         assertFalse(gen.getConnectionStatus());
     }
 
     @Test
-    @Order(14)
     public void powerOffPlayingCheck() {
-        gen=BluetoothSpeaker.getInstance();
+        gen = BluetoothSpeaker.getInstance();
+        gen.resetState();
+        gen.powerButtonPushed();
+        gen.prevButtonPushed();
+        gen.powerButtonPushed();
         assertFalse(gen.getPlayingStatus());
     }
-    
-
 }
