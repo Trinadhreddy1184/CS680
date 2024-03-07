@@ -6,8 +6,7 @@ import java.util.Objects;
 public class BluetoothSpeaker {
 
     private State state ;
-
-    private boolean isplaying,isconnected = false;
+    
 
     private static  BluetoothSpeaker instance=null;
 
@@ -43,37 +42,26 @@ public class BluetoothSpeaker {
     }
 
     public void playMusic(){
-        this.isplaying=true;
+
     }
 
     public void stopMusic(){
-        this.isplaying=false;
+
     }
 
     public void enableBluetooth(){
-        this.isconnected=true;
+
     }
 
     public void disableBluetooth(){
-        this.isconnected=false;
     }
 
     public State getCurrentState(){
        return this.state;
     }
-
-
-    public boolean getPlayingStatus(){
-        return this.isplaying;
-    }
-
-    public boolean getConnectionStatus(){
-        return this.isconnected;
-    }
+    
 
     public void resetState() {
         this.state = Stopped.getInstance();
-        this.isplaying = false;
-        this.isconnected = false;
     }
 }

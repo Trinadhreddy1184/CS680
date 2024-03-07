@@ -7,13 +7,6 @@ public class BluetoothSpeakerTest {
     private BluetoothSpeaker gen;
     
     @Test
-    public void onBeforeStartConnectionCheck() {
-        gen = BluetoothSpeaker.getInstance();
-        gen.resetState();
-        assertFalse(gen.getConnectionStatus());
-    }
-
-    @Test
     public void onBeforeStartCheck() {
         gen = BluetoothSpeaker.getInstance();
         gen.resetState();
@@ -28,22 +21,8 @@ public class BluetoothSpeakerTest {
         assertEquals(StandBy.getInstance(), gen.getCurrentState());
     }
 
-    @Test
-    public void onStartConnectionCheck() {
-        gen = BluetoothSpeaker.getInstance();
-        gen.resetState();
-        gen.powerButtonPushed();
-        assertTrue(gen.getConnectionStatus());
-    }
 
-    @Test
-    public void playCheck() {
-        gen = BluetoothSpeaker.getInstance();
-        gen.resetState();
-        gen.powerButtonPushed();
-        gen.playPauseButtonPushed();
-        assertTrue(gen.getPlayingStatus());
-    }
+
 
     @Test
     public void playingModeCheck() {
@@ -53,16 +32,7 @@ public class BluetoothSpeakerTest {
         gen.playPauseButtonPushed();
         assertEquals(Playing.getInstance(), gen.getCurrentState());
     }
-
-    @Test
-    public void pauseCheck() {
-        gen = BluetoothSpeaker.getInstance();
-        gen.resetState();
-        gen.powerButtonPushed();
-        gen.playPauseButtonPushed();
-        gen.playPauseButtonPushed();
-        assertFalse(gen.getPlayingStatus());
-    }
+    
 
     @Test
     public void pauseModeCheck() {
@@ -74,14 +44,7 @@ public class BluetoothSpeakerTest {
         assertEquals(StandBy.getInstance(), gen.getCurrentState());
     }
 
-    @Test
-    public void playNextCheck() {
-        gen = BluetoothSpeaker.getInstance();
-        gen.resetState();
-        gen.powerButtonPushed();
-        gen.nextButtonPushed();
-        assertTrue(gen.getPlayingStatus());
-    }
+
 
     @Test
     public void playNextModeCheck() {
@@ -111,23 +74,5 @@ public class BluetoothSpeakerTest {
         assertEquals(Stopped.getInstance(), gen.getCurrentState());
     }
 
-    @Test
-    public void powerOffConnectionCheck() {
-        gen = BluetoothSpeaker.getInstance();
-        gen.resetState();
-        gen.powerButtonPushed();
-        gen.prevButtonPushed();
-        gen.powerButtonPushed();
-        assertFalse(gen.getConnectionStatus());
-    }
 
-    @Test
-    public void powerOffPlayingCheck() {
-        gen = BluetoothSpeaker.getInstance();
-        gen.resetState();
-        gen.powerButtonPushed();
-        gen.prevButtonPushed();
-        gen.powerButtonPushed();
-        assertFalse(gen.getPlayingStatus());
-    }
 }
