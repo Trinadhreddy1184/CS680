@@ -1,0 +1,71 @@
+<!-- Build script to test filesystem Design implementation of BluetoothSpeaker and WifiRouter  -->
+<!--  To run this build script, type:
+
+      ant -f build.xml
+
+      on a shell.
+-->
+<project name="filesystem-junit" basedir="."  default="clean" xmlns:ivy="antlib:org.apache.ivy.ant">
+    <property name="src" location="src/main" />
+    <property name="src.test" location="src/test" />
+    <property name="bin" location="build/main" />
+    <property name="bin.test" location="build/test" />
+    <property name="ivy.lib" location="lib"/>
+
+    <target name="download"
+            description="--> Download JAR files (listed in ivy.xml) to the 'lib' directory.">
+        <mkdir dir="${ivy.lib}"/>
+        <ivy:retrieve/>
+    </target>
+
+    <target name="init" depends="download">
+        <mkdir dir="${bin}"/>
+        <mkdir dir="${bin.test}"/>
+        <path id="classpath">
+            <pathelement location="${bin}" />
+            <pathelement location="${bin.test}" />
+            <fileset dir="${ivy.lib}"/>
+        </path>
+        <echo message="CLASSPATH: ${toString:classpath}" />
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no">
+            <classpath refid="classpath"/>
+            <include name="umbcs680/filesystem/*.java"/>
+        </javac>
+        <javac srcdir="${src.test}" destdir="${bin.test}" includeAntRuntime="no">
+            <classpath refid="classpath"/>
+            <include name="umbcs680/filesystem/*.java"/>
+        </javac>
+    </target>
+
+    <target name="test" depends="compile">
+        <junitlauncher haltOnFailure="true" printSummary="true">
+            <classpath refid="classpath" />
+            <testclasses outputdir="${bin.test}">
+                <fileset dir="${bin.test}">
+                    <include name="umbcs680/filesystem/*Test.class" />
+                </fileset>
+            </testclasses>
+            <listener type="legacy-plain" sendSysOut="true" />
+            <listener type="legacy-xml" sendSysOut="true" sendSysErr="true" />
+            <listener type="legacy-brief" sendSysOut="true" />
+        </junitlauncher>
+        <junitreport todir="${bin.test}">
+            <fileset dir="${bin.test}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="noframes" todir="${bin.test}"/>
+        </junitreport>
+
+    </target>
+
+    <target name="clean" depends="test">
+        <delete includeemptydirs="true">
+            <fileset dir="${bin}/umbcs680/filesystem" includes="**/*"/>
+            <fileset dir="${bin.test}/umbcs680/filesystem" includes="**/*"/>
+        </delete>
+    </target>
+
+</project>
