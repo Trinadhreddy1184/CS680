@@ -14,56 +14,84 @@ public class DirectoryTest {
         fs = TestFixtureInitializer.createFS();
     }
 
+
+    private String[] dirToStringArray(Directory d){
+        String[] dirInfo = {d.getName(),String.valueOf(d.getTotalSize()),d.getPermission(),
+                String.valueOf(d.countChildren()),String.valueOf(d.getCreationTime())};
+        return dirInfo;
+    }
+
+    
+
+    
     @Test
     public void driveCheck(){
-        Directory CDrive = fs.getRootDirs().getFirst();
-        assertTrue(CDrive.isDirectory());
+        Directory repo = fs.getRootDirs().getFirst();
+        assertTrue(repo.isDirectory());
     }
 
     @Test
     public void toatalSizeCheck(){
-        Directory CDrive = fs.getRootDirs().getFirst();
-        assertEquals(65,CDrive.getTotalSize());
-        
+        Directory repo = fs.getRootDirs().getFirst();
+        assertEquals(150,repo.getTotalSize());
+
     }
 
-    @Test
-    public void permissionCheck(){
-        Directory CDrive = fs.getRootDirs().getFirst();
-        CDrive.changePermission("drwx-rwxrw-");
-        assertEquals("drwx-rwxrw-",CDrive.getPermission());
-    }
 
     @Test
-    public void subDirectoryCheck(){
-        Directory CDrive = fs.getRootDirs().getFirst();
-        Directory desktop = CDrive.getSubDirectories().getFirst();
-        assertEquals("desktop1",desktop.getName());
+    public void verifyDirectoryEqualityRoot(){
+        String[] expectedDirInfo = {"repo","150","drwx-r-xr-x","2","2022-04-24T14:33"};
+        Directory repo = fs.getRootDirs().getFirst();
+        assertArrayEquals(expectedDirInfo,dirToStringArray(repo));
     }
+
 
     @Test
     public void subDirectoryParentCheck(){
-        Directory CDrive = fs.getRootDirs().getFirst();
-        Directory desktop = CDrive.getSubDirectories().getFirst();
-        assertEquals(CDrive,desktop.getParent());
+        Directory repo = fs.getRootDirs().getFirst();
+        Directory src = repo.getSubDirectories().getFirst();
+        assertEquals(repo,src.getParent());
     }
-    
-    @Test
-    public void subDirectoryChildrenCountCheck(){
-        Directory CDrive = fs.getRootDirs().getFirst();
-        Directory desktop = CDrive.getSubDirectories().getFirst();
-        assertEquals(2,desktop.countChildren());
-    }
-    
+
 
     @Test
-    public void removeChildCheck(){
-        Directory FDrive = fs.getRootDirs().getLast();
-        Directory desktop = FDrive.getSubDirectories().getFirst();
-        FDrive.removeChild(desktop);
-        assertEquals(0,FDrive.countChildren());
+    public void verifyDirectoryEqualitysrc() {
+        Directory repo = fs.getRootDirs().getFirst();
+        Directory src = repo.getSubDirectories().getFirst();
+        String[] expectedDirInfo = {"src","130","drwx-r-xr-x","2","2022-04-24T14:36"};
+        assertArrayEquals(expectedDirInfo,dirToStringArray(src));
     }
+
+
+
+    @Test
+    public void subDirectoryChildrenCountCheck(){
+        Directory repo = fs.getRootDirs().getFirst();
+        Directory src = repo.getSubDirectories().getFirst();
+        assertEquals(2,src.countChildren());
+    }
+
+    @Test
+    public void verifyDirectoryEqualitymain() {
+        Directory repo = fs.getRootDirs().getFirst();
+        Directory src = repo.getSubDirectories().getFirst();
+        Directory main = src.getSubDirectories().get(0);
+        String[] expectedDirInfo = {"main", "85", "drwx-r-xr-x", "2", "2022-04-24T20:10"};
+        assertArrayEquals(expectedDirInfo,dirToStringArray(main));
+    }
+
+    @Test
+    public void verifyDirectoryEqualitytestWithChangePermission() {
+        Directory repo = fs.getRootDirs().getFirst();
+        Directory src = repo.getSubDirectories().getFirst();
+        Directory test = src.getSubDirectories().get(1);
+        test.changePermission("drwxrwxrwx");
+        String[] expectedDirInfo = {"test", "45", "drwxrwxrwx", "2", "2022-04-24T20:10"};
+        assertArrayEquals(expectedDirInfo,dirToStringArray(test));
+    }
+
     
+
     
 
 }

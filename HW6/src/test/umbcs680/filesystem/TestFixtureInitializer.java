@@ -9,24 +9,24 @@ public class TestFixtureInitializer {
 
     public static umbcs680.filesystem.FileSystem createFS(){
         umbcs680.filesystem.FileSystem fs = umbcs680.filesystem.FileSystem.getFileSystem();
-        Directory CDrive = new Directory(null,"CDrive",0,LocalDateTime.now());
-        Directory FDrive = new Directory(null,"FDrive",0,LocalDateTime.now());
-        fs.appendRootDir(CDrive);
-        fs.appendRootDir(FDrive);
-        Directory desktop1 = new Directory(CDrive,"desktop1",0,LocalDateTime.now());
-        Directory desktop2 = new Directory(FDrive,"desktop2",0,LocalDateTime.now());
-        Directory documents1 = new Directory(CDrive,"document1",0,LocalDateTime.now());
-        CDrive.appendChild(desktop1);
-        CDrive.appendChild(documents1);
-        FDrive.appendChild(desktop2);
-        umbcs680.filesystem.File file1 = new umbcs680.filesystem.File(desktop1,"file1",20,LocalDateTime.now());
-        umbcs680.filesystem.File file2 = new umbcs680.filesystem.File(desktop1,"file2",45,LocalDateTime.now());
-        umbcs680.filesystem.File file3 = new umbcs680.filesystem.File(desktop2,"file3",60,LocalDateTime.now());
-        umbcs680.filesystem.File file4 = new umbcs680.filesystem.File(desktop2,"file4",70,LocalDateTime.now());
-        desktop1.appendChild(file1);
-        desktop1.appendChild(file2);
-        desktop2.appendChild(file3);
-        desktop2.appendChild(file4);
+        Directory repo = new Directory(null,"repo",0,LocalDateTime.of(2022,04, 24, 14, 33));
+        fs.appendRootDir(repo);
+        Directory src = new Directory(repo,"src",0,LocalDateTime.of(2022,04, 24, 14, 36));
+        umbcs680.filesystem.File readmemd = new umbcs680.filesystem.File(repo,"readme.md",20,LocalDateTime.of(2022,04, 24, 14, 40));
+        repo.appendChild(src);
+        repo.appendChild(readmemd);
+        Directory main = new Directory(src,"main",0,LocalDateTime.of(2022,04, 24, 20,10));
+        Directory test = new Directory(src,"test",0,LocalDateTime.of(2022,04, 24, 20,10));
+        src.appendChild(main);
+        src.appendChild(test);
+        umbcs680.filesystem.File Ajava = new umbcs680.filesystem.File(main,"A.java",35,LocalDateTime.of(2022,04, 24, 22, 10));
+        umbcs680.filesystem.File Bjava = new umbcs680.filesystem.File(main,"B.java",50,LocalDateTime.of(2022,04, 24, 22, 15));
+        umbcs680.filesystem.File ATestjava = new umbcs680.filesystem.File(test,"ATest.java",20,LocalDateTime.of(2022,04, 24, 23, 00));
+        umbcs680.filesystem.File BTestjava = new umbcs680.filesystem.File(test,"BTest.java",25,LocalDateTime.of(2022,04, 24, 23, 10));
+        main.appendChild(Ajava);
+        main.appendChild(Bjava);
+        test.appendChild(ATestjava);
+        test.appendChild(BTestjava);
 
         return fs;
     }

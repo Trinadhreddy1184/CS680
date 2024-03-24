@@ -22,15 +22,14 @@ public class FileSystemTest {
 
     @Test
     public void rootCountCheck(){
-        assertEquals(2,fs.getRootCount());
+        assertEquals(1,fs.getRootCount());
     }
 
 
     @Test
     public void rootsCheck(){
         LinkedList<Directory> expectedRoots = new LinkedList<Directory>();
-        expectedRoots.add(new Directory(null,"CDrive",0,LocalDateTime.now()));
-        expectedRoots.add(new Directory(null,"FDrive",0,LocalDateTime.now()));
+        expectedRoots.add(new Directory(null,"repo",0,LocalDateTime.now()));
         assertEquals(expectedRoots.getFirst().getName(),fs.getRootDirs().getFirst().getName());
     }
 

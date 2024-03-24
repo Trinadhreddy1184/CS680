@@ -28,6 +28,10 @@ public abstract class FSElement {
     public String getName(){
         return this.name;
     }
+    
+    public LocalDateTime getCreationTime(){
+        return this.creationTime;
+    }
 
     public void setParent(Directory newParent){
         this.parent=newParent;
