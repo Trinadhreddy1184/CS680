@@ -1,8 +1,8 @@
-# Composite Design Pattern Implementation
+# Proxy Design Pattern Implementation (on Composite) 
 
 ## Overview
 
-In this Composite design pattern implementation, the `FSElement` class serves as the base class for both `Directory`,`Link` and `File` objects. The `Directory` class represents a directory, while the `File` class represents a file and `Link` class represents a link which the target for link is a FSElement. The `FileSystem` class manages the overall file system structure.
+In this Proxy design pattern implementation (on the top of Composite), the `FSElement` class serves as the base class for both `Directory`,`Link` and `File` objects. The `Directory` class represents a directory, while the `File` class represents a file and `Link` class represents a link which the target for link is a FSElement. The `FileSystem` class manages the overall file system structure.
 
 ## Components
 
