@@ -32,11 +32,11 @@
     <target name="compile" depends="init">
         <javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no">
             <classpath refid="classpath"/>
-            <include name="umbcs680/filesystemcomparator/*.java"/>
+            <include name="umbcs680/hw12/filesystemcomparator/*.java"/>
         </javac>
         <javac srcdir="${src.test}" destdir="${bin.test}" includeAntRuntime="no">
             <classpath refid="classpath"/>
-            <include name="umbcs680/filesystemcomparator/*.java"/>
+            <include name="umbcs680/hw12/filesystemcomparator/*.java"/>
         </javac>
     </target>
 
@@ -45,7 +45,7 @@
             <classpath refid="classpath" />
             <testclasses outputdir="${bin.test}">
                 <fileset dir="${bin.test}">
-                    <include name="umbcs680/filesystemcomparator/*Test.class" />
+                    <include name="umbcs680/hw12/filesystemcomparator/*Test.class" />
                 </fileset>
             </testclasses>
             <listener type="legacy-plain" sendSysOut="true" />
@@ -63,8 +63,8 @@
 
     <target name="clean" depends="test">
         <delete includeemptydirs="true">
-            <fileset dir="${bin}/umbcs680/filesystemcomparator" includes="**/*"/>
-            <fileset dir="${bin.test}/umbcs680/filesystemcomparator" includes="**/*"/>
+            <fileset dir="${bin}/umbcs680/hw12/filesystemcomparator" includes="**/*"/>
+            <fileset dir="${bin.test}/umbcs680/hw12/filesystemcomparator" includes="**/*"/>
         </delete>
     </target>
 
