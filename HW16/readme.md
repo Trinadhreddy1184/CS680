@@ -17,13 +17,16 @@ In this Multicast design pattern implementation, **BluetoothSpeaker** and **Wifi
 - **WifiRouterObserver**
 
 ### Observers
- Observers are replaced using lambda expressions
+ - Observers are replaced using lambda expressions
 
 ### Event Classes
 
 - **BluetoothEvent**
 - **WifiEvent**
 
+### DoSomething class
+ - The dummy class containg static void methods for any type of operation.
+  
 ## Usage
 
 1. **Bluetooth Speaker:**
